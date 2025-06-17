@@ -3,82 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Full-Page Table</title>
-    <style>
-        /* Essential for making html and body fill the entire viewport */
-        html, body {
-            height: 100%; /* Ensures 100% of viewport height */
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Prevents scrollbars if content slightly exceeds viewport */
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            display: flex; /* Use flexbox to center the table */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            background-color: #f0f0f0; /* Light background color */
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%; /* Make the table fill 100% of its parent (body) width */
-            height: 100%; /* Make the table fill 100% of its parent (body) height */
-            /* The max-width from previous examples is removed to allow it to cover the entire page */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-        }
-
-        td {
-            border: 2px solid #333; /* Table cell borders */
-            padding: 1vw; /* Use viewport width for padding to make it responsive */
-            text-align: center;
-            font-size: 4vw; /* Crucial for responsive text: 4% of viewport width */
-            font-weight: bold;
-            color: #333;
-            /* Flexbox for perfect content centering within each cell */
-            display: flex;
-            flex-direction: column; /* Stack text vertically */
-            justify-content: center; /* Center content vertically */
-            align-items: center; /* Center content horizontally */
-        }
-
-        /* Media queries for fine-tuning responsiveness on smaller screens */
-        @media (max-width: 768px) {
-            td {
-                font-size: 6vw; /* Larger font relative to viewport on tablets */
-                padding: 2vw; /* More padding on tablets */
-            }
-        }
-
-        @media (max-width: 480px) {
-            td {
-                font-size: 8vw; /* Even larger font on mobile phones */
-                padding: 3vw; /* Even more padding on mobile phones */
-            }
-        }
-
-        .box1 {
-            background-color: #FFDDC1; /* A chosen light orange-pink color */
-        }
-
-        .box2 {
-            background-color: #B2EBF2; /* A chosen light blue color */
-        }
-    </style>
+    <title>nongnampetch.com</title>
+    <link rel="stylesheet" href="responsive.css"
 </head>
 <body>
-    <table>
-        <tr>
-            <td class="box1">
-                <span>Box One Text!</span>
-                <span>Hello World!</span>
-            </td>
-            <td class="box2">
-                <span>Second Box Here!</span>
-                <span>CSS Power!</span>
-            </td>
-        </tr>
-    </table>
+        <table>
+            <tr>
+                <td style="background-color: rgb(226, 184, 226);">test</td>
+                <td style="background-color: lightblue;">test</td>
+            </tr>
+        </table>
 </body>
 </html>

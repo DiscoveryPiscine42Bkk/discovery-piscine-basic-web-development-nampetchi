@@ -3,80 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Two Box Table</title>
+    <title>nongnampetch.com</title>
     <style>
-        html, body {
-            height: 100%; /* Ensure html and body take full viewport height */
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Prevent unwanted scrollbars if content slightly exceeds */
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f0f0; /* Light background color */
-        }
-
         table {
+            width: 100vw;
+            height: 100vh;
             border-collapse: collapse;
-            width: 100%; /* Make the table fill 100% of its parent container (body) */
-            height: 100%; /* Make the table fill 100% of its parent container (body) */
-            /* Removed max-width to allow it to cover the entire page */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
         td {
-            border: 2px solid #333; /* Table border */
-            padding: 20px;
-            text-align: center;
-            font-size: 4vw; /* Use viewport width units for font size to make it responsive */
-            font-weight: bold;
-            color: #333;
-            /* Flexbox for vertical and horizontal centering of content within the cell */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Adjust padding based on viewport size for better responsiveness */
-        @media (max-width: 768px) {
-            td {
-                padding: 10px;
-                font-size: 6vw; /* Larger font on smaller screens relative to viewport */
-            }
-        }
-
-        @media (max-width: 480px) {
-            td {
-                padding: 5px;
-                font-size: 8vw; /* Even larger font on very small screens */
-            }
-        }
-
-        .box1 {
-            background-color: #FFDDC1; /* Light orange-pink color */
-        }
-
-        .box2 {
-            background-color: #B2EBF2; /* Light blue color */
+            width: 50vw;
+            height: 100vh;
+            border: solid black;
         }
     </style>
 </head>
 <body>
     <table>
         <tr>
-            <td class="box1">
-                <span>This is the first box</span>
-                <span>Warm orange!</span>
-            </td>
-            <td class="box2">
-                <span>This is the second box</span>
-                <span>Lovely blue!</span>
-            </td>
+            <td style="background-color: rgb(226, 184, 226);">test</td>
+            <td style="background-color: lightblue;">test</td>
         </tr>
     </table>
 </body>
