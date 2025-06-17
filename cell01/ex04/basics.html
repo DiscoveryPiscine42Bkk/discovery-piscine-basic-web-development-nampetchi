@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basics</title>
+    <style>
+        body {
+            background-color: #FFC0CB; /* Pink! What's wrong with pink? */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 20px;
+        }
+        h1 {
+            color: white;
+            font-size: 3em;
+            text-align: center;
+        }
+        .shop-images {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Space between images */
+            margin-top: 30px;
+        }
+        .shop-item {
+            text-align: center;
+        }
+        .shop-item img {
+            width: 250px; /* Adjust as needed */
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .shop-item a {
+            display: block;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .shop-item a:hover {
+            text-decoration: underline;
+        }
+        hr {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        }
+        .footer {
+            text-align: right;
+            font-style: italic;
+            font-family: monospace;
+            margin-right: 10%; /* Align to the right side of the page */
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the &lt;Web&gt; Page!</h1>
+
+        <div class="shop-images">
+            <div class="shop-item">
+                <img src="https://www.centralworld.co.th/storage/stores/S/starbucks.jpg" alt="Starbucks">
+                <a href="https://starbucks.co.th/th/" target="_blank">Starbucks</a>
+            </div>
+            <div class="shop-item">
+                <img src="https://image.makewebeasy.net/makeweb/m_1920x0/vaQzGnSlA/DefaultData/logo.png" alt="ChaTraMue">
+                <a href="https://www.cha-thai.com/" target="_blank">ChaTraMue</a>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="footer">
+            © nampetchi 2025
+        </div>
+    </div>
+</body>
+</html>
