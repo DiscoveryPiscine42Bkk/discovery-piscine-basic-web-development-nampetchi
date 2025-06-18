@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #ffb4b4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fce29a;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(241, 253, 134, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            text-align: center;
+            color: #867dff;
+            margin-bottom: 20px;
+        }
+        #newButton {
+            background-color: #b7ffba;
+            color: rgb(71, 139, 148);
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box; 
+        }
+        #newButton:hover {
+            background-color: #a9cbfd;
+        }
+        #ft_list {
+            border: 1px solid #e0b5fd;
+            min-height: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f8a6e4;
+        }
+        .todo-item {
+            background-color: #fc7f7f;
+            border: 1px solid #fdd17f;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            word-wrap: break-word; 
+            transition: background-color 0.2s ease;
+        }
+        .todo-item:hover {
+            background-color: #f5f77b;
+        }
+        .todo-item:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My To-Do List</h1>
+        <button id="newButton">New</button>
+        <div id="ft_list">
+            </div>
+    </div>
+
+    <script>
+        const ftList = document.getElementById('ft_list');
+        const newButton = document.getElementById('newButton');
+        const COOKIE_NAME = 'todoListItems';
+
+        // --- Cookie Functions ---
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function saveList() {
+            const todoItems = [];
+            ftList.querySelectorAll('.todo-item').forEach(item => {
+                todoItems.push(item.textContent);
+            });
+            setCookie(COOKIE_NAME, JSON.stringify(todoItems), 365); 
+            console.log("List saved:", todoItems);
+        }
+
+        function createTodoItem(text) {
+            const todoDiv = document.createElement('div');
+            todoDiv.className = 'todo-item';
+            todoDiv.textContent = text;
+
+            todoDiv.addEventListener('click', function() {
+                const confirmDelete = confirm(`Do you want to remove this TO DO?\n"${text}"`);
+                if (confirmDelete) {
+                    ftList.removeChild(todoDiv); 
+                    saveList(); 
+                    console.log(`Removed TO DO: "${text}"`);
+                }
+            });
+
+            if (ftList.firstChild) {
+                ftList.insertBefore(todoDiv, ftList.firstChild);
+            } else {
+                ftList.appendChild(todoDiv);
+            }
+            saveList(); 
+            console.log(`Added new TO DO: "${text}"`);
+        }
+
+        newButton.addEventListener('click', function() {
+            const todoText = prompt("Enter a new TO DO:");
+            if (todoText !== null && todoText.trim() !== '') { 
+                createTodoItem(todoText.trim());
+            } else if (todoText !== null) {
+                alert("TO DO cannot be empty.");
+            }
+        });
+
+        window.addEventListener('load', function() {
+            const savedList = getCookie(COOKIE_NAME);
+            if (savedList) {
+                try {
+                    const todoItems = JSON.parse(savedList);
+                    if (Array.isArray(todoItems)) {
+                        for (let i = todoItems.length - 1; i >= 0; i--) {
+                            createTodoItem(todoItems[i]);
+                        }
+                        console.log("List loaded from cookie:", todoItems);
+                    }
+                } catch (e) {
+                    console.error("Error parsing saved TO DO list from cookie:", e);
+                }
+            } else {
+                console.log("No TO DO list found in cookie. Starting blank.");
+            }
+        });
+    </script>
+</body>
+</html>

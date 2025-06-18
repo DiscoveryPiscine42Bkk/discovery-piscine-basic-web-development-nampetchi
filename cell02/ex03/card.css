@@ -1,0 +1,133 @@
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fa8181;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.profile-card {
+  background-color: #fac37b;
+  width: 300px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(241, 233, 120, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; 
+  overflow: visible; 
+}
+
+.card-title {
+  font-size: 2em;
+  color: #86f877;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  position: absolute; 
+  top: -50px; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  width: auto; 
+  white-space: nowrap; 
+  margin-bottom: 0; 
+  text-align: center; 
+}
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 50px; 
+  margin-bottom: 25px;
+}
+
+.info-table td {
+  padding: 0;
+  text-align: center;
+  vertical-align: top;
+}
+
+.profile-picture {
+  width: 180px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #7efdfd;
+  box-shadow: 0 4px 10px rgba(131, 123, 248, 0.1);
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login {
+  font-size: 1.6em;
+  color: #d177fa;
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+.description {
+  font-size: 1.1em;
+  color: #fc7ad0;
+  margin-bottom: 25px;
+  line-height: 1.5;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.social-icons img {
+  width: 70px;
+  height: 50px;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: grayscale(10%);
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+  filter: grayscale(0%);
+}
+
+.contact-button-cell {
+  text-align: center;
+}
+
+.contact-button {
+  background-color: #ff0000;
+  color: white;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  box-shadow: 0 4px 10px rgba(255, 153, 0, 0.3);
+}
+
+.contact-button:hover {
+  background-color: #f2ff37;
+  transform: translateY(-2px);
+}

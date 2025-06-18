@@ -1,0 +1,71 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+.parallax-section {
+    position: relative;
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.parallax-1 {
+    background-image: url('https://i.pinimg.com/originals/07/73/02/0773026e9df003697f5bc4d8fe33fbf0.gif');
+}
+
+.parallax-2 {
+    background-image: url('https://www.icegif.com/wp-content/uploads/2023/03/icegif-1758.gif');
+}
+
+.message-box {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px 40px;
+    border-radius: 10px;
+}
+
+.message-box h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.message-box p {
+    font-size: 1.2em;
+}
+
+.content-section {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.black-block {
+    background-color: black;
+    color: white;
+}
+
+.black-block h2 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.black-block p {
+    font-size: 1.1em;
+    max-width: 800px;
+    line-height: 1.6;
+}
