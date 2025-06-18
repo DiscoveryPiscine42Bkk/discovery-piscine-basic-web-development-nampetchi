@@ -3,7 +3,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #fa8181;
@@ -13,9 +12,8 @@ body {
   min-height: 100vh;
   padding: 20px;
 }
-
 .profile-card {
-  background-color: #fac37b;
+  background-color: #ffffff;
   width: 300px;
   padding: 20px;
   border-radius: 15px;
@@ -27,14 +25,12 @@ body {
   position: relative; 
   overflow: visible; 
 }
-
 .card-title {
   font-size: 2em;
   color: #86f877;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-
   position: absolute; 
   top: -50px; 
   left: 50%; 
@@ -44,20 +40,17 @@ body {
   margin-bottom: 0; 
   text-align: center; 
 }
-
 .info-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 50px; 
   margin-bottom: 25px;
 }
-
 .info-table td {
   padding: 0;
   text-align: center;
   vertical-align: top;
 }
-
 .profile-picture {
   width: 180px;
   height: 200px;
@@ -70,14 +63,12 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
-
 .login {
   font-size: 1.6em;
   color: #d177fa;
   margin: 10px 0;
   font-weight: 600;
 }
-
 .description {
   font-size: 1.1em;
   color: #fc7ad0;
@@ -87,14 +78,12 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
-
 .social-icons {
   display: flex;
   justify-content: center;
   gap: 15px;
   margin-bottom: 30px;
 }
-
 .social-icons img {
   width: 70px;
   height: 50px;
@@ -102,16 +91,13 @@ body {
   transition: transform 0.3s ease, filter 0.3s ease;
   filter: grayscale(10%);
 }
-
 .social-icons img:hover {
   transform: scale(1.1);
   filter: grayscale(0%);
 }
-
 .contact-button-cell {
   text-align: center;
 }
-
 .contact-button {
   background-color: #ff0000;
   color: white;
@@ -124,9 +110,8 @@ body {
   text-decoration: none;
   display: inline-block;
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
-  box-shadow: 0 4px 10px rgba(255, 153, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
 }
-
 .contact-button:hover {
   background-color: #f2ff37;
   transform: translateY(-2px);
