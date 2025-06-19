@@ -3,165 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
+    <title>Ex03bis: jQuery To-Do List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e0f2f7; 
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: flex-start; 
             min-height: 100vh;
-            background-color: #ffb4b4;
             margin: 0;
-            padding: 20px;
+            padding-top: 50px; 
+            box-sizing: border-box;
         }
-        .container {
-            background-color: #fce29a;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(241, 253, 134, 0.1);
+        .todo-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
+            text-align: center;
         }
         h1 {
-            text-align: center;
-            color: #867dff;
-            margin-bottom: 20px;
+            color: #2196f3; 
+            margin-bottom: 25px;
+            font-size: 2.5em;
         }
-        #newButton {
-            background-color: #b7ffba;
-            color: rgb(71, 139, 148);
-            padding: 10px 15px;
+        #todo-input {
+            width: calc(100% - 100px); 
+            padding: 12px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 1.1em;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+        #add-todo-btn {
+            padding: 12px 20px;
+            background-color: #4CAF50; 
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            margin-bottom: 20px;
-            width: 100%;
-            box-sizing: border-box; 
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
         }
-        #newButton:hover {
-            background-color: #a9cbfd;
+        #add-todo-btn:hover {
+            background-color: #45a049;
         }
-        #ft_list {
-            border: 1px solid #e0b5fd;
-            min-height: 100px;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #f8a6e4;
+        #todo-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 25px;
+            text-align: left;
         }
         .todo-item {
-            background-color: #fc7f7f;
-            border: 1px solid #fdd17f;
-            padding: 10px;
-            margin-bottom: 8px;
-            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+        }
+        .todo-item span {
+            flex-grow: 1;
+            font-size: 1.1em;
+            color: #333;
             cursor: pointer;
             word-wrap: break-word; 
-            transition: background-color 0.2s ease;
+            overflow-wrap: break-word;
         }
-        .todo-item:hover {
-            background-color: #f5f77b;
+        .todo-item.completed span {
+            text-decoration: line-through;
+            color: #888;
+            font-style: italic;
         }
-        .todo-item:last-child {
-            margin-bottom: 0;
+        .todo-item .delete-btn {
+            background-color: #f44336; 
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-left: 15px;
+            transition: background-color 0.3s ease;
+        }
+        .todo-item .delete-btn:hover {
+            background-color: #da190b;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>My To-Do List</h1>
-        <button id="newButton">New</button>
-        <div id="ft_list">
-            </div>
+
+    <div class="todo-container">
+        <h1>My jQuery To-Do List</h1>
+        <div>
+            <input type="text" id="todo-input" placeholder="Add a new task...">
+            <button id="add-todo-btn">Add Task</button>
+        </div>
+        <ul id="todo-list">
+            </ul>
     </div>
 
     <script>
-        const ftList = document.getElementById('ft_list');
-        const newButton = document.getElementById('newButton');
-        const COOKIE_NAME = 'todoListItems';
+        $(document).ready(function() {
 
-        // --- Cookie Functions ---
-        function setCookie(name, value, days) {
-            let expires = "";
-            if (days) {
-                const date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
+            function addTodoItem() {
+                let todoText = $("#todo-input").val().trim(); 
+
+                if (todoText !== "") { 
+                    let newTodoItem = `
+                        <li class="todo-item">
+                            <span>${todoText}</span>
+                            <button class="delete-btn">Delete</button>
+                        </li>
+                    `;
+                    
+                    $("#todo-list").append(newTodoItem);
+
+                    $("#todo-input").val("");
+                } else {
+                    alert("Please enter a task!");
+                }
             }
-            document.cookie = name + "=" + (value || "") + expires + "; path=/";
-        }
 
-        function getCookie(name) {
-            const nameEQ = name + "=";
-            const ca = document.cookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-            }
-            return null;
-        }
-
-        function saveList() {
-            const todoItems = [];
-            ftList.querySelectorAll('.todo-item').forEach(item => {
-                todoItems.push(item.textContent);
+            $("#add-todo-btn").click(function() {
+                addTodoItem();
             });
-            setCookie(COOKIE_NAME, JSON.stringify(todoItems), 365); 
-            console.log("List saved:", todoItems);
-        }
 
-        function createTodoItem(text) {
-            const todoDiv = document.createElement('div');
-            todoDiv.className = 'todo-item';
-            todoDiv.textContent = text;
-
-            todoDiv.addEventListener('click', function() {
-                const confirmDelete = confirm(`Do you want to remove this TO DO?\n"${text}"`);
-                if (confirmDelete) {
-                    ftList.removeChild(todoDiv); 
-                    saveList(); 
-                    console.log(`Removed TO DO: "${text}"`);
+            $("#todo-input").keypress(function(e) {
+                if (e.which === 13) { 
+                    addTodoItem();
                 }
             });
 
-            if (ftList.firstChild) {
-                ftList.insertBefore(todoDiv, ftList.firstChild);
-            } else {
-                ftList.appendChild(todoDiv);
-            }
-            saveList(); 
-            console.log(`Added new TO DO: "${text}"`);
-        }
+            $("#todo-list").on("click", ".delete-btn", function() {
+                $(this).closest(".todo-item").fadeOut(300, function() {
+                    $(this).remove(); 
+                });
+            });
 
-        newButton.addEventListener('click', function() {
-            const todoText = prompt("Enter a new TO DO:");
-            if (todoText !== null && todoText.trim() !== '') { 
-                createTodoItem(todoText.trim());
-            } else if (todoText !== null) {
-                alert("TO DO cannot be empty.");
-            }
-        });
+            $("#todo-list").on("click", ".todo-item span", function() {
+                $(this).closest(".todo-item").toggleClass("completed");
+            });
 
-        window.addEventListener('load', function() {
-            const savedList = getCookie(COOKIE_NAME);
-            if (savedList) {
-                try {
-                    const todoItems = JSON.parse(savedList);
-                    if (Array.isArray(todoItems)) {
-                        for (let i = todoItems.length - 1; i >= 0; i--) {
-                            createTodoItem(todoItems[i]);
-                        }
-                        console.log("List loaded from cookie:", todoItems);
-                    }
-                } catch (e) {
-                    console.error("Error parsing saved TO DO list from cookie:", e);
-                }
-            } else {
-                console.log("No TO DO list found in cookie. Starting blank.");
-            }
         });
     </script>
+
 </body>
 </html>

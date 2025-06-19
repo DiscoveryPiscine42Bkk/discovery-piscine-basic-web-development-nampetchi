@@ -2,61 +2,97 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Explode this balloon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex01bis: Resizable Balloon with jQuery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         body {
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: #ffd0f5;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
         }
         #balloon {
-            width: 200px;
-            height: 200px;
-            background: rgb(252, 169, 169);
-            border-radius: 50%;
-            transition: width 0.2s, height 0.2s, background 0.2s;
-            cursor: pointer;
+            width: 100px;
+            height: 100px;
+            background-color: #ff6347; 
+            border-radius: 50%; 
             display: flex;
             justify-content: center;
             align-items: center;
-            user-select: none;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out; 
+        }
+        #balloon.expanded {
+            background-color: #ffa500;
         }
     </style>
 </head>
 <body>
-    <div id="balloon"></div>
+
+    <h1>Click the Balloon!</h1>
+    <div id="balloon">
+        Click Me!
+
     <script>
-        const balloon = document.getElementById('balloon');
-        const colors = ['red', 'green', 'blue'];
-        let colorIndex = 0;
-        let size = 200;
+        $(document).ready(function() {
+            const initialSize = 100; //px
+            const sizeIncrement = 10; //px
+            const maxSize = 200; //px
+            const minSize = 100; //px
+            let currentSize = initialSize;
 
-        function updateBalloon() {
-            balloon.style.width = size + 'px';
-            balloon.style.height = size + 'px';
-            balloon.style.background = colors[colorIndex];
-        }
-
-        balloon.addEventListener('click', function() {
-            size += 10;
-            colorIndex = (colorIndex + 1) % colors.length;
-            if (size > 420) {
-                // Explode!
-                size = 200;
-                colorIndex = 0;
+            function updateSizeDisplay() {
+                $("#current-size").text(currentSize + "px");
             }
-            updateBalloon();
-        });
 
-        balloon.addEventListener('mouseleave', function() {
-            size = Math.max(200, size - 5);
-            colorIndex = (colorIndex - 1 + colors.length) % colors.length;
-            updateBalloon();
-        });
+            updateSizeDisplay();
 
-        updateBalloon();
+            $("#balloon").click(function() {
+                currentSize += sizeIncrement;
+
+                if (currentSize > maxSize) {
+                    currentSize = minSize;
+                }
+
+                $(this).css({
+                    "width": currentSize + "px",
+                    "height": currentSize + "px"
+                });
+
+                if (currentSize === initialSize) {
+                    $(this).removeClass("expanded");
+                } else {
+                    $(this).addClass("expanded");
+                }
+
+                updateSizeDisplay(); 
+            });
+
+            $("#balloon").hover(
+                function() {
+                    if (currentSize === initialSize) { 
+                         $(this).css({
+                            "transform": "scale(1.05)",
+                            "box-shadow": "0 0 15px rgba(0,0,0,0.3)"
+                        });
+                    }
+                },
+                function() {
+                    $(this).css({
+                        "transform": "scale(1)",
+                        "box-shadow": "none"
+                    });
+                }
+            );
+        });
     </script>
+
 </body>
 </html>

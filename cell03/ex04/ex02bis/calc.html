@@ -3,124 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Calculator</title>
+    <title>Ex02bis: Simple Calculator with jQuery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f3afaf;
             margin: 0;
+            background-color: #f4f4f4;
         }
-        .calculator-container {
-            background-color: #fad97e;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(233, 248, 148, 0.1);
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        input[type="text"], select {
-            padding: 8px;
-            margin: 5px;
-            border: 1px solid #c7fcba;
+        .calculator input[type="text"] {
+            width: calc(100% - 20px); 
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            text-align: right;
+            border: 1px solid #ddd;
             border-radius: 4px;
-            font-size: 16px;
         }
-        input[type="submit"] {
-            background-color: #a5cdf8;
-            color: rgb(180, 190, 250);
-            padding: 10px 20px;
+        .calculator .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns */
+            gap: 10px;
+        }
+        .calculator button {
+            padding: 15px;
+            font-size: 1.2em;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 18px;
-            margin-top: 15px;
+            background-color: #e0e0e0;
+            transition: background-color 0.2s ease;
         }
-        input[type="submit"]:hover {
-            background-color: #cfadfa;
+        .calculator button:hover {
+            background-color: #d0d0d0;
+        }
+        .calculator button.operator {
+            background-color: #f39c12;
+        }
+        .calculator button.operator:hover {
+            background-color: #e67e22;
+        }
+        .calculator button.equals {
+            background-color: #2ecc71; 
+            color: white;
+        }
+        .calculator button.equals:hover {
+            background-color: #27ae60;
+        }
+        .calculator button.clear {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .calculator button.clear:hover {
+            background-color: #c0392b;
         }
     </style>
 </head>
 <body>
-    <div class="calculator-container">
-        <h2>Basic Calculator</h2>
-        <form id="calculatorForm">
-            <input type="text" id="leftMember" placeholder="Left Number">
-            <select id="operator">
-                <option value="+">+</option>
-                <option value="-">-</option>
-                <option value="*">*</option>
-                <option value="/">/</option>
-                <option value="%">%</option>
-            </select>
-            <input type="text" id="rightMember" placeholder="Right Number">
-            <br>
-            <input type="submit" value="Try me!">
-        </form>
+
+    <div class="calculator">
+        <input type="text" id="display" value="" readonly>
+        <div class="buttons">
+            <button class="number" data-value="7">7</button>
+            <button class="number" data-value="8">8</button>
+            <button class="number" data-value="9">9</button>
+            <button class="operator" data-value="/">/</button>
+
+            <button class="number" data-value="4">4</button>
+            <button class="number" data-value="5">5</button>
+            <button class="number" data-value="6">6</button>
+            <button class="operator" data-value="*">*</button>
+
+            <button class="number" data-value="1">1</button>
+            <button class="number" data-value="2">2</button>
+            <button class="number" data-value="3">3</button>
+            <button class="operator" data-value="-">-</button>
+
+            <button class="number" data-value="0">0</button>
+            <button class="number" data-value=".">.</button>
+            <button class="equals" id="equals-btn">=</button>
+            <button class="operator" data-value="+">+</button>
+
+            <button class="clear" id="clear-btn">C</button>
+        </div>
     </div>
 
     <script>
-        const calculatorForm = document.getElementById('calculatorForm');
-        const leftMemberInput = document.getElementById('leftMember');
-        const operatorSelect = document.getElementById('operator');
-        const rightMemberInput = document.getElementById('rightMember');
+        $(document).ready(function() {
+            let display = $("#display"); 
+            let currentInput = "";
+            let operator = null;
+            let firstOperand = null;
 
-        calculatorForm.addEventListener('submit', function(event) {
-            event.preventDefault(); 
-
-            const leftVal = parseInt(leftMemberInput.value);
-            const rightVal = parseInt(rightMemberInput.value);
-            const operator = operatorSelect.value;
-
-            if (isNaN(leftVal) || leftVal < 0 || !Number.isInteger(leftVal) ||
-                isNaN(rightVal) || rightVal < 0 || !Number.isInteger(rightVal)) {
-                
-                alert('Error :('); 
-                console.log('Error: Both fields must contain positive integer values (>= 0).'); // Log error to console
-                return; 
+            function updateDisplay(value) {
+                display.val(value);
             }
 
-            let result; 
-            
-            if ((operator === '/' || operator === '%') && rightVal === 0) {
-                const errorMessage = "It's over 9000!";
-                alert(errorMessage); 
-                console.log(errorMessage); 
-                console.log("Attempted calculation: " + leftVal + operator + rightVal + " (Division/Modulo by zero)");
-                return; 
-            }
+            $(".number").click(function() {
+                let value = $(this).data("value"); 
+                if (currentInput.includes('.') && value === '.') {
+                    return; 
+                }
+                currentInput += value;
+                updateDisplay(currentInput);
+            });
 
-            switch (operator) {
-                case '+':
-                    result = leftVal + rightVal;
-                    break;
-                case '-':
-                    result = leftVal - rightVal;
-                    break;
-                case '*':
-                    result = leftVal * rightVal;
-                    break;
-                case '/':
-                    result = leftVal / rightVal;
-                    break;
-                case '%':
-                    result = leftVal % rightVal;
-                    break;
-                default:
-                    alert('Error: Invalid operator.');
-                    console.log('Error: An invalid operator was selected.');
-                    return;
-            }
+            $(".operator").click(function() {
+                let op = $(this).data("value"); 
 
-            alert('Result: ' + result); 
-            console.log("Calculation result: " + leftVal + operator + rightVal + " = " + result); 
+                if (firstOperand === null && currentInput !== "") {
+                    firstOperand = parseFloat(currentInput);
+                    operator = op;
+                    currentInput = ""; 
+                } else if (firstOperand !== null && currentInput !== "") {
+                    let secondOperand = parseFloat(currentInput);
+                    let result = calculate(firstOperand, secondOperand, operator);
+                    updateDisplay(result);
+                    firstOperand = result; 
+                    operator = op;
+                    currentInput = "";
+                } else if (firstOperand !== null && currentInput === "") {
+                    operator = op;
+                }
+            });
+
+            $("#equals-btn").click(function() {
+                if (firstOperand !== null && currentInput !== "" && operator !== null) {
+                    let secondOperand = parseFloat(currentInput);
+                    let result = calculate(firstOperand, secondOperand, operator);
+                    updateDisplay(result);
+                    firstOperand = null; 
+                    operator = null;
+                    currentInput = result.toString();
+                } else if (currentInput !== "") {
+                    updateDisplay(currentInput);
+                }
+            });
+
+            $("#clear-btn").click(function() {
+                currentInput = "";
+                operator = null;
+                firstOperand = null;
+                updateDisplay("0");
+            });
+
+            function calculate(num1, num2, op) {
+                let result;
+                switch (op) {
+                    case '+':
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        result = num1 - num2;
+                        break;
+                    case '*':
+                        result = num1 * num2;
+                        break;
+                    case '/':
+                        result = num2 !== 0 ? num1 / num2 : "Error"; 
+                        break;
+                    default:
+                        result = "Error";
+                }
+                return typeof result === 'number' ? parseFloat(result.toFixed(8)) : result;
+            }
+            updateDisplay("0");
         });
-
-        setInterval(function() {
-            alert('Please, use me...');
-        }, 30000); 
     </script>
+
 </body>
 </html>

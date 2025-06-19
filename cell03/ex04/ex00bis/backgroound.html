@@ -2,18 +2,87 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Change Background</title>
-    <link rel="stylesheet" href="backgroound.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex00bis: Background Changer with jQuery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Make body at least full viewport height */
+            margin: 0;
+            transition: background-color 0.5s ease; /* Smooth transition for background */
+        }
+        .color-button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        .color-button:hover {
+            opacity: 1;
+        }
+        #red-btn { background-color: #e74c3c; } /* Alizarin */
+        #green-btn { background-color: #27ae60; } /* Nephritis */
+        #blue-btn { background-color: #3498db; } /* Peter River */
+        #reset-btn { background-color: #7f8c8d; } /* Asbestos */
+    </style>
 </head>
 <body>
-    <button id="change-bg-btn">Change Background Color</button>
+
+    <h1>Change My Background!</h1>
+    <div id="button-container">
+        <button class="color-button" id="red-btn">Red</button>
+        <button class="color-button" id="green-btn">Green</button>
+        <button class="color-button" id="blue-btn">Blue</button>
+        <button class="color-button" id="reset-btn">Reset</button>
+    </div>
+
     <script>
-        function getRandomColor() {
-            return '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
-        }
-        document.getElementById('change-bg-btn').onclick = function() {
-            document.body.style.background = getRandomColor();
-        }
+        $(document).ready(function() {
+            // Function to set body background color
+            function setBackgroundColor(color) {
+                $("body").css("background-color", color);
+            }
+
+            // Click event for the Red button
+            $("#red-btn").click(function() {
+                setBackgroundColor("#e74c3c"); // Set to Alizarin red
+            });
+
+            // Click event for the Green button
+            $("#green-btn").click(function() {
+                setBackgroundColor("#27ae60"); // Set to Nephritis green
+            });
+
+            // Click event for the Blue button
+            $("#blue-btn").click(function() {
+                setBackgroundColor("#3498db"); // Set to Peter River blue
+            });
+
+            // Click event for the Reset button
+            $("#reset-btn").click(function() {
+                setBackgroundColor("white"); // Reset to white
+            });
+
+            // Optional: Change H1 color when hovering over it
+            $("h1").hover(
+                function() {
+                    $(this).css("color", "purple"); // Mouse enters
+                }, function() {
+                    $(this).css("color", "black"); // Mouse leaves
+                }
+            );
+        });
     </script>
+
 </body>
 </html>

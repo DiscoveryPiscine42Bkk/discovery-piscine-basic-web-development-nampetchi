@@ -1,0 +1,301 @@
+/* --- General Body and Container Styling --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5; /* Light grey background */
+    color: #333;
+    /* This padding-top is mainly for nampetch_cv.html and bonus_cv.html with fixed navbar */
+    padding-top: 70px;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Specific styling for the landing page (index.html) */
+body.index-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 20px; /* Reset padding for index page */
+    padding-bottom: 20px;
+    /* Ensure no fixed navbar overlap on index page, though it doesn't have one */
+}
+
+.main-container {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    padding: 40px;
+    max-width: 1000px; /* Increased max-width for better layout */
+    width: 100%;
+}
+
+.main-container h1 {
+    color: #007bff; /* Primary blue for main heading */
+    font-weight: 700;
+}
+.main-container p.lead {
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+
+/* --- Profile Cards on index.html --- */
+.profile-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%; /* Make cards same height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space */
+}
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.profile-thumb {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid; /* Border color set by specific card classes */
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card .profile-name {
+    font-size: 1.8em;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.profile-card .profile-title {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 10px;
+}
+.profile-card .profile-school {
+    font-size: 0.95em;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.profile-card .profile-socials a {
+    font-size: 1.8em;
+    color: #555;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+.profile-card .profile-socials a:hover.fa-instagram { color: #E1306C; }
+.profile-card .profile-socials a:hover.fa-facebook { color: #4267B2; }
+
+.btn-view-cv {
+    font-size: 1.1em;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    margin-top: auto; /* Push button to bottom */
+}
+
+/* Specific colors for Kjaisaba card */
+.kjaisaba-card .profile-thumb { border-color: #007bff; } /* Blue */
+.kjaisaba-card .profile-name { color: #007bff; }
+.kjaisaba-card .btn-view-cv { background-color: #007bff; border-color: #007bff; }
+.kjaisaba-card .btn-view-cv:hover { background-color: #0056b3; border-color: #0056b3; }
+
+/* Specific colors for jboonchu card */
+.jboonchu-card .profile-thumb { border-color: #28a745; } /* Green */
+.jboonchu-card .profile-name { color: #28a745; }
+.jboonchu-card .btn-view-cv { background-color: #28a745; border-color: #28a745; }
+.jboonchu-card .btn-view-cv:hover { background-color: #218838; border-color: #218838; }
+
+
+/* --- Custom Navigation Bar (for CV pages) --- */
+.custom-navbar {
+    background-color: #343a40; /* Dark background */
+    padding: 1rem 0;
+    position: fixed; /* Make it fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it stays on top */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.custom-navbar .nav-link {
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+.custom-navbar .nav-link:hover {
+    color: #007bff; /* Default highlight for main nav links */
+}
+.custom-navbar .navbar-brand {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+/* Specific hover colors for CV links in navbar (apply to links within their respective CVs) */
+.custom-navbar .nav-link.kjaisaba-link:hover {
+    color: #007bff; /* Blue for Kjaisaba */
+}
+.custom-navbar .nav-link.jboonchu-link:hover {
+    color: #28a745; /* Green for jboonchu */
+}
+
+
+/* --- Main Sections Styling (for each CV in combined_cv.html, nampetch_cv.html, bonus_cv.html) --- */
+.cv-section {
+    padding: 60px 0;
+    margin-bottom: 40px; /* More space between sections */
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    scroll-margin-top: 80px; /* Adjust scroll position for fixed navbar */
+}
+.cv-section:last-of-type {
+    margin-bottom: 20px; /* Less margin for the very last section */
+}
+
+/* --- Individual CV Section Headings --- */
+.cv-section > h1 { /* Apply to h1 directly inside cv-section */
+    font-size: 3em;
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* --- Individual Section Styling within each CV --- */
+section {
+    padding: 40px 0; /* Slightly less padding than cv-section */
+    margin-bottom: 20px;
+    background-color: #fdfdfd; /* Lighter background for sub-sections */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    scroll-margin-top: 80px;
+}
+section h2 {
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* --- Kjaisaba Specific Styles --- */
+/* These IDs are now in nampetch_cv.html */
+#cv-kjaisaba h1 { color: #007bff; }
+#kjaisaba-personal-info h2 { color: #007bff; }
+#kjaisaba-personal-info .profile-img { border-color: #007bff; }
+#kjaisaba-personal-info .personal-details p i { color: #007bff; }
+
+#kjaisaba-hobbies-activities h2 { color: #007bff; }
+#kjaisaba-hobbies-activities .carousel-caption { color: #ffffff; }
+#kjaisaba-hobbies-activities .carousel-control-prev-icon,
+#kjaisaba-hobbies-activities .carousel-control-next-icon { filter: invert(1) brightness(1.5); }
+#kjaisaba-hobbies-activities .carousel-indicators button { background-color: #007bff; }
+
+#kjaisaba-experience-skills h2 { color: #007bff; }
+#kjaisaba-experience-skills .experience-item h4 { color: #0056b3; }
+#kjaisaba-experience-skills .skills-list li { background-color: #e2f0fb; color: #007bff; }
+
+#kjaisaba-contact-info h2 { color: #007bff; }
+#kjaisaba-contact-info a { color: #007bff; }
+#kjaisaba-contact-info a:hover { color: #0056b3; }
+
+
+/* --- jboonchu Specific Styles --- */
+/* These IDs are now in bonus_cv.html */
+#cv-jboonchu h1 { color: #28a745; }
+#jboonchu-personal-info h2 { color: #28a745; }
+#jboonchu-personal-info .profile-img { border-color: #28a745; }
+#jboonchu-personal-info .personal-details p i { color: #28a745; }
+
+#jboonchu-hobbies-activities h2 { color: #28a745; }
+#jboonchu-hobbies-activities .carousel-caption { color: #ffffff; }
+#jboonchu-hobbies-activities .carousel-control-prev-icon,
+#jboonchu-hobbies-activities .carousel-control-next-icon { filter: invert(1) brightness(1.5); }
+#jboonchu-hobbies-activities .carousel-indicators button { background-color: #28a745; }
+
+#jboonchu-experience-skills h2 { color: #28a745; }
+#jboonchu-experience-skills .experience-item h4 { color: #218838; }
+#jboonchu-experience-skills .skills-list li { background-color: #e6ffed; color: #28a745; }
+
+#jboonchu-contact-info h2 { color: #28a745; }
+#jboonchu-contact-info a { color: #28a745; }
+#jboonchu-contact-info a:hover { color: #218838; }
+
+
+/* --- Common Styles for Personal Info, Hobbies, Experience, Contact Sections in CVs --- */
+/* Note: profile-img and social-icons common styles are defined earlier for index.html as well */
+
+/* Styling for personal details block in CVs */
+.personal-details p {
+    font-size: 1.05em;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 500;
+}
+.personal-details p i {
+    font-size: 1.1em;
+    vertical-align: middle;
+}
+
+/* Styling for activity images in carousel */
+.activity-img {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 10px;
+}
+.carousel-caption h5 {
+    font-size: 1.3em;
+    margin-bottom: 5px;
+}
+.carousel-caption p {
+    font-size: 0.9em;
+    margin-bottom: 0;
+}
+
+
+/* --- Responsive adjustments for Bootstrap --- */
+@media (max-width: 767.98px) {
+    /* Navbar for CV pages */
+    .custom-navbar .navbar-nav {
+        text-align: center;
+        background-color: #343a40;
+    }
+    .custom-navbar .nav-link {
+        padding: 0.8rem 1rem;
+    }
+    .custom-navbar .navbar-toggler-icon {
+        filter: invert(1); /* Make toggler icon white */
+    }
+    .custom-navbar .navbar-toggler {
+        border-color: rgba(255,255,255,.1);
+    }
+
+    /* Index page adjustments */
+    body.index-page {
+        padding-top: 20px;
+        align-items: flex-start; /* Align to top on small screens if content is tall */
+    }
+    .main-container {
+        padding: 25px;
+    }
+    .profile-card {
+        margin-bottom: 20px;
+    }
+
+    /* Carousel adjustments for smaller screens */
+    .carousel-caption {
+        font-size: 0.8em; /* Smaller font for captions */
+        padding: 5px;
+    }
+    .carousel-caption h5 {
+        font-size: 1em;
+    }
+}
