@@ -45,7 +45,6 @@
     text-align: center;
 }
 
-/* --- ส่วน CSS สำหรับ Social Icons ที่แก้ไข --- */
 .facebook {
     width: 20.5px;
     height: 20.5px;
@@ -53,7 +52,6 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    /* ลบ display: block; และ margin: 0 auto; ออกจากที่นี่ */
 }
 
 .ig {
@@ -63,13 +61,12 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    /* ลบ display: block; และ margin: 0 auto; ออกจากที่นี่ */
 }
 
-.social { /* ใช้ .social เป็น container สำหรับไอคอน */
-    display: flex; /* ทำให้เป็น Flex container */
-    justify-content: center; /* จัดเรียงไอคอนให้อยู่กึ่งกลางในแนวนอน */
-    align-items: center; /* จัดเรียงไอคอนให้อยู่กึ่งกลางในแนวตั้ง (ถ้ามีองค์ประกอบขนาดต่างกัน) */
+.social { 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
     gap: 15px; 
     padding: 10px 0; 
 }
